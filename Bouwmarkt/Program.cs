@@ -12,7 +12,13 @@ namespace Bouwmarkt
             string outputMode = inp[2];
             
             MinHeap<Kassa> kassas = new MinHeap<Kassa>();
+            for (int i = 0; i < nKassas; i++)
+                kassas.Insert(new Kassa(i, int.Parse(Console.ReadLine())));
+            //todo: make a queue of klanten
+            //when they arrive, extract smallest kassa for them to go to
+            //add kassa back into heap
 
+            // add events
 
 
 
@@ -25,7 +31,7 @@ namespace Bouwmarkt
             public int heapPos;
             public Queue<long> KassaQueue;
 
-            public Kassa(int kassaSpeed, int pos)
+            public Kassa(int pos, int kassaSpeed)
             {
                 KassaSpeed = kassaSpeed;
                 this.pos = pos;
