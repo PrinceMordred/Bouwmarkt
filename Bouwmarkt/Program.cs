@@ -40,7 +40,11 @@ namespace Bouwmarkt
 
             public int CompareTo(Kassa other)
             {
-                
+                if (KassaQueue.Count < other.KassaQueue.Count)
+                    return -1;
+                if (KassaQueue.Count == other.KassaQueue.Count && pos < other.pos)
+                    return -1;
+                return 1;
             }
 
             public void SetHeapIndex(int index)
