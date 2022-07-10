@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bouwmarkt // Note: actual namespace depends on the project name.
+namespace Bouwmarkt 
 {
     internal class Program
     {
@@ -32,7 +32,7 @@ namespace Bouwmarkt // Note: actual namespace depends on the project name.
                 KassaQueue = new Queue<long>();
             }
 
-            public int CompareTo(Kassa? other)
+            public int CompareTo(Kassa other)
             {
                 
             }
@@ -58,7 +58,6 @@ namespace Bouwmarkt // Note: actual namespace depends on the project name.
         public class MinHeap<T> where T : IComparable<T>, IHeapItem
         {
             List<T> A;
-
             public MinHeap()
             {
                 A = new List<T>();
