@@ -12,13 +12,20 @@ namespace Bouwmarkt
             string outputMode = inp[2];
             
             MinHeap<Kassa> kassas = new MinHeap<Kassa>();
+            MinHeap<Event> events = new MinHeap<Event>();
             for (int i = 0; i < nKassas; i++)
                 kassas.Insert(new Kassa(i, int.Parse(Console.ReadLine())));
-            //todo: make a queue of klanten
-            //when they arrive, extract smallest kassa for them to go to
-            //add kassa back into heap
+            for(int i = 0; i < nKlanten; i++)
+            {
+                inp = Console.ReadLine().Split();
+                events.Insert(new Event(int.Parse(inp[1]), long.Parse(inp[0])));
+            }
+            while(events.length > 0)
+            {
 
-            // add events
+
+            }
+
 
 
 
@@ -49,20 +56,36 @@ namespace Bouwmarkt
 
             public void SetHeapIndex(int index)
             {
-                
+                heapPos = index;
             }
         }
         public class Event : IComparable<Event>, IHeapItem
         {
+            public Kassa k;
+            public int heapPos;
+            public long basketSize;
+            public long tijd;
 
+            public Event(Kassa k, long tijd)
+            {
+                this.k = k;
+                this.tijd = tijd;
+            }
+            public Event(int size, long tijd)
+            {
+                basketSize = size;
+                this.tijd = tijd;
+            }
             public int CompareTo(Event other)
             {
-                
+                if (tijd < other.tijd)
+                    return -1;
+                return 1;
             }
 
             public void SetHeapIndex(int index)
             {
-                
+                heapPos = index;
             }
         }
         public class MinHeap<T> where T : IComparable<T>, IHeapItem
@@ -111,8 +134,8 @@ namespace Bouwmarkt
             public void Insert(T k)
             {
                 int n = length;
-                A[++n] = k;
-                Rootify(n);
+                A.Add(k);
+                Rootify(++n);
             }
             private void Swap(int i, int j)
             {
