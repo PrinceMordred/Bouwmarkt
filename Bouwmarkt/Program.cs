@@ -1,5 +1,6 @@
-﻿using System;
-
+﻿using System.Collections.Generic;
+using System;
+using System.Linq;
 namespace Bouwmarkt 
 {
     internal class Program
@@ -23,7 +24,7 @@ namespace Bouwmarkt
             while(events.length > 0)
             {
                 e = events.ExtraxtMin();
-                if (!(e.k is null))
+                if (!(e.k == null))
                 {
                     if (outputMode.Equals("F"))
                         Console.WriteLine(e.tijd + ": finish " + e.k.pos);
@@ -127,7 +128,7 @@ namespace Bouwmarkt
             }
             public void Rootify(int i)
             {
-                if (i <= 1 || A[i].CompareTo(A[P(i)]) >= 0)
+                if (i == 1 || A[i].CompareTo(A[P(i)]) >= 0)
                     return;
                 Swap(i, P(i));
                 Rootify(P(i));
