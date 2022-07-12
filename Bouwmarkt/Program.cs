@@ -14,7 +14,7 @@ namespace Bouwmarkt
             MinHeap<Kassa> kassas = new MinHeap<Kassa>();
             MinHeap<Event> events = new MinHeap<Event>();
             for (int i = 0; i < nKassas; i++)
-                kassas.Insert(new Kassa(i, int.Parse(Console.ReadLine())));
+                kassas.Insert(new Kassa(i, long.Parse(Console.ReadLine())));
             for(int i = 0; i < nKlanten; i++)
             {
                 inp = Console.ReadLine().Split();
@@ -46,7 +46,7 @@ namespace Bouwmarkt
                     k.KassaQueue.Enqueue(e.basketSize);
                     if(k.KassaQueue.Count == 1)
                     {
-                        events.Insert(new Event(k, e.tijd +  k.KassaSpeed* k.KassaQueue.First()));
+                        events.Insert(new Event(k, e.tijd +  k.KassaSpeed * k.KassaQueue.First()));
                         if (outputMode.Equals("F"))
                             Console.WriteLine(e.tijd + ": start " + k.pos);
                     }
@@ -57,12 +57,12 @@ namespace Bouwmarkt
         }
         public class Kassa : IComparable<Kassa>, IHeapItem
         {
-            public int KassaSpeed;
-            public int pos;
+            public long KassaSpeed;
+            public long pos;
             public int heapPos;
             public Queue<long> KassaQueue;
 
-            public Kassa(int pos, int kassaSpeed)
+            public Kassa(long pos, long kassaSpeed)
             {
                 KassaSpeed = kassaSpeed;
                 this.pos = pos;
@@ -119,33 +119,32 @@ namespace Bouwmarkt
             }
             public T ExtraxtMin()
             {
-                int n = length;
                 T res = A[1];   
-                A[1] = A[n];
-                A.RemoveAt(n);
+                A[1] = A[length];
+                A.RemoveAt(length);
                 Heapify(1);
                 return res;
             }
             public void Rootify(int i)
             {
-                if (i <= 1 || A[i].CompareTo(A[P(i)]) >= 0)
+                if (i == 1 || A[i].CompareTo(A[P(i)]) >= 0)
                     return;
                 Swap(i, P(i));
                 Rootify(P(i));
             }
             public void Insert(T k)
             {
-                int n = length;
                 A.Add(k);
-                Rootify(++n);
+                A[length].SetHeapIndex(length);
+                Rootify(length);
             }
             private void Swap(int i, int j)
             {
                 T a = A[i];
                 A[i] = A[j];
                 A[j] = a;
-                A[i].SetHeapIndex(j);
-                A[j].SetHeapIndex(i);
+                A[i].SetHeapIndex(i);
+                A[j].SetHeapIndex(j);
             }
         }
         public interface IHeapItem
