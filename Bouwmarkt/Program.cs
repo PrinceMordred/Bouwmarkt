@@ -87,7 +87,17 @@ namespace Bouwmarkt
                 basketSize = size;
                 this.tijd = tijd;
             }
-            public int CompareTo(Event other) => tijd < other.tijd ? -1 : 1;
+            public int CompareTo(Event other)
+            {
+                if (tijd == other.tijd)
+                {
+                    if(k != null && other.k != null)
+                        return (int)(k.pos - other.k.pos);
+                    if (other.k != null)
+                        return -1;
+                }
+                return (int)(tijd - other.tijd);
+            }
 
             public void SetHeapIndex(int index) => heapPos = index;
         }
