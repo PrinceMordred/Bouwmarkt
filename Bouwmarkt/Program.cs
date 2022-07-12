@@ -18,7 +18,7 @@ namespace Bouwmarkt
             for(int i = 0; i < nKlanten; i++)
             {
                 inp = Console.ReadLine().Split();
-                events.Insert(new Event(int.Parse(inp[1]), long.Parse(inp[0])));
+                events.Insert(new Event(long.Parse(inp[1]), long.Parse(inp[0])));
             }
             Event e = default;
             while(events.length > 0)
@@ -82,7 +82,7 @@ namespace Bouwmarkt
                 this.k = k;
                 this.tijd = tijd;
             }
-            public Event(int size, long tijd)
+            public Event(long size, long tijd)
             {
                 basketSize = size;
                 this.tijd = tijd;
@@ -128,7 +128,7 @@ namespace Bouwmarkt
             }
             public void Rootify(int i)
             {
-                if (i == 1 || A[i].CompareTo(A[P(i)]) >= 0)
+                if (i <= 1 || A[i].CompareTo(A[P(i)]) >= 0)
                     return;
                 Swap(i, P(i));
                 Rootify(P(i));
